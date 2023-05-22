@@ -6,6 +6,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: transparent;
 }
 
 a {
@@ -19,4 +20,83 @@ a {
 
 body {
   background-color: #88effd;
+}
+.me-auto{
+  margin-left: 1000px;
+}
+.signupbtn{
+color: white;
+}
+.signbtn{
+  color: #88effd;
+  width: 150px;
+  height:50px;
+}
+.nav-link{
+  width: 150px;
+}
+.navbar{
+  height: 80px;
+}
+#hero {
+  background: url('https://onclickwebdesign.com/wp-content/uploads/hero_1.jpg') center center no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+}
+.fade {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(52, 58, 64, 0.9);
+  z-index: 1;
+}
+.fade:not(.show) {
+  opacity: .85;
+}
+
+#hero .hero-text {
+  position: absolute;
+  top: 45%;
+  margin: -75px auto 0;
+  left: 0;
+  right: 1000px;
+  z-index: 1;
+  color: #fff;
+  width: 700px;
+  text-align: center;
+}
+
+#hero .hero-text p {
+  line-height: 1.5em;
+  font-weight: 300;
+  font-size: 1rem;
+}
+.banner-right {
+  background-image: url(https://d3iv89674z08wb.cloudfront.net/assets/marketing/realscout-macbook@2x-45817fde4a721c0d5a4b4c5d181c0d59a978b8aa19833a4f9f57889eef329350.png);
+  position: relative;
+  top: 132px;
+margin-left: 48%;
+  height: 535px;
+  width: 950px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  z-index: 3;
+
+}
+video#bgvideo {
+  position: absolute !important;
+  left: 11.7%;
+  right: 0 !important;
+  top: 7% !important;
+  display: inline-block;
+  width: 76.9% !important;
+  background: initial !important;
+  height: initial !important;
 }
