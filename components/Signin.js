@@ -11,6 +11,7 @@ function Signin() {
         <div className="fade" />
         <div className="hero-text">
           <h1>Where agents and homebuyers search for a home together</h1>
+          <br />
           <Button className="signbtn" onClick={signIn}>Sign In</Button>
         </div>
         <div className="banner-right" />

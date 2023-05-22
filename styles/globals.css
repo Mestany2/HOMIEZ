@@ -63,21 +63,16 @@ color: white;
 
 #hero .hero-text {
   position: absolute;
-  top: 45%;
+  top: 35%;
   margin: -75px auto 0;
   left: 0;
   right: 1000px;
   z-index: 1;
   color: #fff;
-  width: 700px;
+  width: 500px;
   text-align: center;
 }
 
-#hero .hero-text p {
-  line-height: 1.5em;
-  font-weight: 300;
-  font-size: 1rem;
-}
 .banner-right {
   background-image: url(https://d3iv89674z08wb.cloudfront.net/assets/marketing/realscout-macbook@2x-45817fde4a721c0d5a4b4c5d181c0d59a978b8aa19833a4f9f57889eef329350.png);
   position: relative;
