@@ -1,6 +1,7 @@
 import { Button } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
+import ClientSignUp from '../components/forms/ClientSignUp';
 
 function Home() {
   const { user } = useAuth();
@@ -20,6 +21,7 @@ function Home() {
       <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
         Sign Out
       </Button>
+      <ClientSignUp />
     </div>
   );
 }

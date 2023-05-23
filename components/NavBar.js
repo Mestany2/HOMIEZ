@@ -23,7 +23,7 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link className="signupbtn">Agent Sign Up</Nav.Link>
             </Link>
-            <Link passHref href="/">
+            <Link passHref href="./forms/ClientSignUp.js">
               <Nav.Link className="signupbtn">Client Sign Up</Nav.Link>
             </Link>
             {user ? (
