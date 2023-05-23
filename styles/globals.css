@@ -32,6 +32,9 @@ color: white;
   width: 150px;
   height:50px;
 }
+#signoutbtn{
+  margin-left: 1200px;
+}
 .nav-link{
   width: 150px;
 }

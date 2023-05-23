@@ -15,7 +15,7 @@ const initialState = {
 };
 
 export default function ClientSignUp({ obj }) {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [formInput, setFormInput] = useState(initialState);
   const [realtors, setRealtors] = useState([]);
   const { user } = useAuth();
@@ -25,6 +25,8 @@ export default function ClientSignUp({ obj }) {
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
+  //   const handleShow = () => setShow(true);
+
   useEffect(() => {
     getRealtors().then((allrealtors) => setRealtors(allrealtors));
   }, []);
@@ -33,8 +35,6 @@ export default function ClientSignUp({ obj }) {
     setShow(false);
     router.push('/');
   };
-
-  const handleShow = () => setShow(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,10 +58,8 @@ export default function ClientSignUp({ obj }) {
       addClient(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateClient(patchPayload).then(() => {
-          router.push('/');
-          //   onUpdate();
-          setShow(false);
-          setFormInput(initialState);
+          handleClose();
+        // setFormInput(initialState);
         });
       });
     }
@@ -69,7 +67,7 @@ export default function ClientSignUp({ obj }) {
 
   return (
     <>
-      <Button
+      {/* <Button
         variant="primary"
         className="modalForm"
         onClick={handleShow}
@@ -81,16 +79,16 @@ export default function ClientSignUp({ obj }) {
         // }}
       >
         Test
-      </Button>
+      </Button> */}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{obj.firebaseKey ? 'Update' : 'Add'} a Client </Modal.Title>
+          <Modal.Title>{obj.firebaseKey ? 'Update' : 'Create'} an Account </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             {/* Video Title  */}
-            <FloatingLabel controlId="floatingInput1" label="Client Name" className="mb-3" style={{ color: 'red' }}>
+            <FloatingLabel controlId="floatingInput1" label="Name" className="mb-3" style={{ color: 'black' }}>
               <Form.Control
                 type="text"
                 placeholder="Your Name"
@@ -102,7 +100,7 @@ export default function ClientSignUp({ obj }) {
             </FloatingLabel>
 
             {/* Video Description  */}
-            <FloatingLabel controlId="floatingInput3" label="Client Phone" className="mb-3" style={{ color: 'red' }}>
+            <FloatingLabel controlId="floatingInput3" label="Phone Number" className="mb-3" style={{ color: 'black' }}>
               <Form.Control
                 type="text"
                 placeholder="Phone Number"

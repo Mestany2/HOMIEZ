@@ -19,20 +19,20 @@ export default function NavBar() {
       <Container>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Link passHref href="/">
-              <Nav.Link className="signupbtn">Agent Sign Up</Nav.Link>
-            </Link>
-            <Link passHref href="./forms/ClientSignUp.js">
-              <Nav.Link className="signupbtn">Client Sign Up</Nav.Link>
-            </Link>
-            {user ? (
-              <Button className="signbtn" onClick={signOut}>Sign Out</Button>
-            )
-              : (
-                <Button className="signbtn" onClick={signIn}>Sign In</Button>
-              )}
-          </Nav>
+          {user ? (
+            <Button id="signoutbtn" onClick={signOut}>Sign Out</Button>
+          ) : (
+            <Nav className="me-auto">
+              <Link passHref href="/">
+                <Nav.Link className="signupbtn">Agent Sign Up</Nav.Link>
+              </Link>
+              <Link passHref href="/clientForm">
+                <Nav.Link className="signupbtn" onClick={signIn}>Client Sign Up</Nav.Link>
+              </Link>
+              <Button className="signbtn" onClick={signIn}>Sign In</Button>
+            </Nav>
+          )}
+
         </Navbar.Collapse>
       </Container>
     </Navbar>
