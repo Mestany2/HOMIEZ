@@ -14,6 +14,18 @@ const getRealtors = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getRealtorByUid = (uid) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/realtors.json?orderBy="realtor_uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 const addRealtor = (payload) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/realtors.json`, {
     method: 'POST',
@@ -57,4 +69,5 @@ export {
   updateRealtor,
   deleteRealtor,
   getRealtors,
+  getRealtorByUid,
 };
