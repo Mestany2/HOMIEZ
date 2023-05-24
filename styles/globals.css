@@ -19,7 +19,7 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #c5c7c7;
 }
 .me-auto{
   margin-left: 1000px;
@@ -109,4 +109,7 @@ video#bgvideo {
   height: calc(100vh - 60px);
   background: #201f1f;
   padding-right: 10px;
+}
+.signoutbtn{
+  margin-left: 70rem;
 }

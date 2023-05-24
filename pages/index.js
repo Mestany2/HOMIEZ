@@ -18,22 +18,21 @@ function Home() {
   }, [realtors]);
 
   const viewRealtorClients = () => { realtors?.map((realtor) => (getRealtorsClients(realtor?.firebaseKey).then(setClients))); };
+
   useEffect(() => {
     viewRealtorClients();
-  }, []);
-
-  console.warn('My fb', realtors);
+  }, [user]);
 
   return (
     <>
-      {realtors.map((realtor) => ((realtor.realtor_uid === user.uid) ? (
+      {realtors?.map((realtor) => ((realtor.realtor_uid === user.uid) ? (
         <>
-        <SideBar />
-        <div>Hello Realtor</div><h1>Hello {user.displayName}! </h1>
-          {clients?.map((client) => <ListOfClients client={client} />)}
-          <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+          <Button variant="danger" type="button" size="lg" className="signoutbtn" onClick={signOut}>
             Sign Out
           </Button>
+          <SideBar />
+          <div>Hello Realtor</div><h1>Hello {user.displayName}! </h1>
+          {clients?.map((client) => <ListOfClients client={client} />)}
         </>
       ) : (
         <>
