@@ -14,22 +14,23 @@ const initialState = {
   client_phone: '',
 };
 
-export default function ClientSignUp({ obj }) {
-  const [show, setShow] = useState(true);
+export default function ClientSignUp({ obj, buttonText, onUpdate }) {
+  const [show, setShow] = useState(false);
   const [formInput, setFormInput] = useState(initialState);
   const [realtors, setRealtors] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
 
+  const handleShow = () => setShow(true);
+
+  // const getListRealtors = () => { getRealtors().then((allrealtors) => setRealtors(allrealtors)); };
   useEffect(() => {
     if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
-
-  //   const handleShow = () => setShow(true);
+  }, [obj]);
 
   useEffect(() => {
     getRealtors().then((allrealtors) => setRealtors(allrealtors));
-  }, []);
+  }, [show]);
 
   const handleClose = () => {
     setShow(false);
@@ -48,7 +49,7 @@ export default function ClientSignUp({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateClient(formInput).then(() => {
-        // onUpdate();
+        onUpdate();
         handleClose();
       });
     } else {
@@ -67,19 +68,15 @@ export default function ClientSignUp({ obj }) {
 
   return (
     <>
-      {/* <Button
-        variant="primary"
-        className="modalForm"
-        onClick={handleShow}
-        // style={{
-        //   backgroundColor: bc,
-        //   color: colorSet,
-        //   border: borderSet,
-        //   fontSize: fontSet,
-        // }}
-      >
-        Test
-      </Button> */}
+      {buttonText ? (
+        <Button
+          variant="primary"
+          className="modalForm"
+          onClick={handleShow}
+        >
+          {buttonText}
+        </Button>
+      ) : handleShow()}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -149,6 +146,8 @@ ClientSignUp.propTypes = {
     user_photo: PropTypes.string,
     userName: PropTypes.string,
   }),
+  buttonText: PropTypes.shape.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 ClientSignUp.defaultProps = {

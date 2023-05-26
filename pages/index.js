@@ -8,20 +8,18 @@ import { getRealtors } from '../api/realtorData';
 import SideBar from '../components/SideBar';
 
 function Home() {
-  const { user } = useAuth();
   const [realtors, setRealtors] = useState([]);
   const [clients, setClients] = useState([]);
-
+  const { user } = useAuth();
   useEffect(() => {
     getRealtors().then(setRealtors);
-    realtors?.map((realtor) => (getRealtorsClients(realtor?.firebaseKey).then(setClients)));
-  }, [realtors]);
+  }, []);
 
   const viewRealtorClients = () => { realtors?.map((realtor) => (getRealtorsClients(realtor?.firebaseKey).then(setClients))); };
 
   useEffect(() => {
     viewRealtorClients();
-  }, [user]);
+  }, [realtors]);
 
   return (
     <>
@@ -32,7 +30,7 @@ function Home() {
           </Button>
           <SideBar />
           <div>Hello Realtor</div><h1>Hello {user.displayName}! </h1>
-          {clients?.map((client) => <ListOfClients client={client} />)}
+          {clients?.map((client) => <ListOfClients key={client.firebaseKey} client={client} onUpdate={viewRealtorClients} />)}
         </>
       ) : (
         <>
