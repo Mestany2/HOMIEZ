@@ -10,7 +10,6 @@ import useFirebaseProfile from '../utils/hook/useFirebaseProfile';
 
 export default function NavBar() {
   const { user } = useAuth();
-
   const profiles = useFirebaseProfile();
   console.warn('here it is', profiles);
 

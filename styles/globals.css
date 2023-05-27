@@ -101,12 +101,12 @@ video#bgvideo {
 .side-bar{
   position: fixed;
   color: white;
-  top: 60px;
-  margin-top: 10px;
-  left: 25px;
+  top: 0;
+  /* margin-top: 10px; */
+  left: 0;
   min-width: 150px;
   width: 100px;
-  height: calc(100vh - 60px);
+  height: 100%;
   background: #201f1f;
   padding-right: 10px;
 }

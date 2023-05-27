@@ -28,7 +28,7 @@ function Home() {
           <Button variant="danger" type="button" size="lg" className="signoutbtn" onClick={signOut}>
             Sign Out
           </Button>
-          <SideBar />
+          <SideBar profile={realtor} />
           <div>Hello Realtor</div><h1>Hello {user.displayName}! </h1>
           {clients?.map((client) => <ListOfClients key={client.firebaseKey} client={client} onUpdate={viewRealtorClients} />)}
         </>

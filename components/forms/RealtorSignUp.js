@@ -22,7 +22,7 @@ export default function RealtorSignUp({ obj }) {
 
   useEffect(() => {
     if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
+  }, [obj]);
 
   //   const handleShow = () => setShow(true);
 

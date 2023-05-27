@@ -14,28 +14,26 @@ const initialState = {
   client_phone: '',
 };
 
-export default function ClientSignUp({ obj, buttonText, onUpdate }) {
+export default function ClientSignUp({
+  obj, onUpdate,
+}) {
   const [show, setShow] = useState(false);
   const [formInput, setFormInput] = useState(initialState);
   const [realtors, setRealtors] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
 
-  const handleShow = () => setShow(true);
-
-  // const getListRealtors = () => { getRealtors().then((allrealtors) => setRealtors(allrealtors)); };
-  useEffect(() => {
-    if (obj.firebaseKey) setFormInput(obj);
-  }, [obj]);
-
-  useEffect(() => {
-    getRealtors().then((allrealtors) => setRealtors(allrealtors));
-  }, [show]);
-
+  // const handleShow = () => setShow(true);
   const handleClose = () => {
     setShow(false);
     router.push('/');
   };
+
+  useEffect(() => {
+    getRealtors().then(setRealtors);
+    if (obj.firebaseKey) setFormInput(obj);
+    if (!obj.firebaseKey) setShow(true);
+  }, [obj, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,18 +63,20 @@ export default function ClientSignUp({ obj, buttonText, onUpdate }) {
       });
     }
   };
+  // const mybtn = useCallback(() => {
+  //   handleShow();
+  // }, []);
 
   return (
     <>
-      {buttonText ? (
+      {obj.firebaseKey ? (
         <Button
-          variant="primary"
-          className="modalForm"
-          onClick={handleShow}
+          className="border-0 modalForm"
+          onClick={() => setShow(true)}
         >
-          {buttonText}
+          Edit
         </Button>
-      ) : handleShow()}
+      ) : ''}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -146,7 +146,6 @@ ClientSignUp.propTypes = {
     user_photo: PropTypes.string,
     userName: PropTypes.string,
   }),
-  buttonText: PropTypes.shape.isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
 
