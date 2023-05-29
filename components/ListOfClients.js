@@ -1,8 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
-import { Button, Card } from 'react-bootstrap';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Button, Image } from 'react-bootstrap';
 import { deleteClient } from '../api/clientsData';
 import ClientSignUp from './forms/ClientSignUp';
 
@@ -14,33 +14,49 @@ export default function ListOfClients({ client, onUpdate }) {
   };
 
   return (
-    <Card className="d-flex flex-row mb-2" style={{ width: '70rem', height: '6rem', border: 'none' }}>
-      <Card.Img style={{ width: '10rem', height: '150' }} src={client.client_image} />
-      <Card.Body className="ms-2 d-flex flex-column">
-        <Card.Title style={{ marginBottom: '10px', fontSize: '25px' }}>{client.client_name}</Card.Title>
-        <Card.Text style={{ fontSize: '15px' }}>{client.client_phone}</Card.Text>
-      </Card.Body>
-      <div style={{ marginLeft: '20px' }} className="d-flex flex-column">
-        <ClientSignUp
-          buttonText={<FontAwesomeIcon icon={faEdit} />}
-          obj={client}
-          onUpdate={onUpdate}
-        />
-        <Button
-          variant="danger"
-          onClick={deleteClientFromList}
-          style={{
-            height: '40px',
-            width: '40px',
-            backgroundColor: 'white',
-            color: 'red',
-            border: 'none',
-          }}
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </Button>
-      </div>
-    </Card>
+    <div className="table-responsive-vertical shadow-z-1">
+      <table id="table" className="fixed_headers">
+        <tbody>
+          <tr>
+
+            {/* <Link passHref href="/"> */}
+            <Image
+              style={{
+                width: '4rem', height: '100', borderRadius: '100px',
+              }}
+              className="clientProf"
+              src={client?.client_image}
+            />
+            {/* </Link> */}
+            <td data-title="Name">{client.client_name}</td>
+            {/* <td data-title="Link">
+              <a href="https://github.com/zavoloklom/material-design-color-palette" target="_blank" rel="noreferrer">GitHub</a>
+            </td> */}
+            <td data-title="Status">{client.client_phone}</td>
+            <ClientSignUp
+              buttonText={<FontAwesomeIcon icon={faEdit} />}
+              obj={client}
+              onUpdate={onUpdate}
+            />
+            <Button
+              className="fields"
+              onClick={deleteClientFromList}
+              style={{
+                height: '40px',
+                width: '40px',
+                backgroundColor: 'transparent',
+                color: 'red',
+                border: 'none',
+              }}
+
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   );
 }
 

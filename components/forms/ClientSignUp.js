@@ -15,7 +15,7 @@ const initialState = {
 };
 
 export default function ClientSignUp({
-  obj, onUpdate,
+  obj, onUpdate, buttonText,
 }) {
   const [show, setShow] = useState(false);
   const [formInput, setFormInput] = useState(initialState);
@@ -58,23 +58,19 @@ export default function ClientSignUp({
         const patchPayload = { firebaseKey: name };
         updateClient(patchPayload).then(() => {
           handleClose();
-        // setFormInput(initialState);
         });
       });
     }
   };
-  // const mybtn = useCallback(() => {
-  //   handleShow();
-  // }, []);
 
   return (
     <>
       {obj.firebaseKey ? (
         <Button
-          className="border-0 modalForm"
+          className="bg-transparent border-0 fields"
           onClick={() => setShow(true)}
         >
-          Edit
+          {buttonText}
         </Button>
       ) : ''}
 
@@ -147,6 +143,7 @@ ClientSignUp.propTypes = {
     userName: PropTypes.string,
   }),
   onUpdate: PropTypes.func.isRequired,
+  buttonText: PropTypes.func.isRequired,
 };
 
 ClientSignUp.defaultProps = {

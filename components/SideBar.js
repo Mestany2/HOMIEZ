@@ -7,10 +7,10 @@ const SideBar = ({ profile }) => (
   <>
     <div className="side-bar">
       <br />
-      <Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={profile.realtor_image} />
-      <h5>{profile.realtor_name}</h5>
+      <Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={profile?.realtor_image} />
+      <h5>{profile?.realtor_name}</h5>
       <br />
-      <Link passHref href="/" className="links"> View Homes </Link> <br />
+      <Link passHref href="/ListOfHouses" className="links"> View Homes </Link> <br />
       <br />
       <Link passHref href="/"> My Clients </Link> <br />
       <hr className="seperator" />

@@ -30,6 +30,18 @@ function Home() {
           </Button>
           <SideBar profile={realtor} />
           <div>Hello Realtor</div><h1>Hello {user.displayName}! </h1>
+          <div className="fixed_headers">
+            <table id="table" className="table table-hover table-mc-light-blue">
+              <thead>
+                <tr>
+                  <th> </th>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Phone Number</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
           {clients?.map((client) => <ListOfClients key={client.firebaseKey} client={client} onUpdate={viewRealtorClients} />)}
         </>
       ) : (
