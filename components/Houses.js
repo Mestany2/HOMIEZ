@@ -12,8 +12,10 @@ export default function Houses({ house }) {
         <div className="heart" />
         <div className="contparent">
           <div className="contchild1">
-            <h3>DETACHED HOUSE &middot; 5Y OLD</h3>
-            <p className="price">{house.listPrice}</p>
+            <br />
+            <button type="submit" className="Interested"> Interested </button>
+            <br />
+            <p className="price">${house.listPrice}</p>
             <p className="address">{house.address.full}</p>
           </div>
           <div className="contchild2">
@@ -34,7 +36,7 @@ export default function Houses({ house }) {
 
 Houses.propTypes = {
   house: PropTypes.shape({
-    listPrice: PropTypes.number,
+    listPrice: PropTypes.string,
     address: PropTypes.string,
     photos: PropTypes.string,
   }).isRequired,
