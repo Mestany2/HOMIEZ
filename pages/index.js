@@ -6,16 +6,19 @@ import { getRealtorsClients } from '../api/clientsData';
 import ListOfClients from '../components/ListOfClients';
 import { getRealtors } from '../api/realtorData';
 import SideBar from '../components/SideBar';
+import SearchBar from '../components/SearchBar';
 
 function Home() {
   const [realtors, setRealtors] = useState([]);
   const [clients, setClients] = useState([]);
+  const [query, setQuery] = useState('');
   const { user } = useAuth();
   useEffect(() => {
     getRealtors().then(setRealtors);
   }, []);
 
   const viewRealtorClients = () => { realtors?.map((realtor) => (getRealtorsClients(realtor?.firebaseKey).then(setClients))); };
+  const filteredClients = clients.filter((client) => client.client_name.toLowerCase().includes(query.toLowerCase()) || client.client_phone.toLowerCase().includes(query.toLocaleLowerCase()));
 
   useEffect(() => {
     viewRealtorClients();
@@ -25,6 +28,7 @@ function Home() {
     <>
       {realtors?.map((realtor) => ((realtor.realtor_uid === user.uid) ? (
         <>
+          <SearchBar query={query} setQuery={setQuery} />
           <Button variant="danger" type="button" size="lg" className="signoutbtn" onClick={signOut}>
             Sign Out
           </Button>
@@ -42,7 +46,7 @@ function Home() {
               </thead>
             </table>
           </div>
-          {clients?.map((client) => <ListOfClients key={client.firebaseKey} client={client} onUpdate={viewRealtorClients} />)}
+          {filteredClients?.map((client) => <ListOfClients key={client.firebaseKey} client={client} onUpdate={viewRealtorClients} />)}
         </>
       ) : (
         <>

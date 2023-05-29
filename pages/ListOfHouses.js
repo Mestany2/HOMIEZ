@@ -5,11 +5,13 @@ import SideBar from '../components/SideBar';
 import { getRealtorByUid } from '../api/realtorData';
 import { useAuth } from '../utils/context/authContext';
 import { getClientByUid } from '../api/clientsData';
+import SearchBar from '../components/SearchBar';
 
 export default function ListOfHouses() {
   const [houses, setHouses] = useState([]);
   const [realtor, setRealtor] = useState([]);
   const [client, setClient] = useState();
+  const [query, setQuery] = useState('');
   const { user } = useAuth();
 
   useEffect(() => {
@@ -18,12 +20,13 @@ export default function ListOfHouses() {
     getClientByUid(user.uid).then(setClient);
   }, [user]);
 
-  console.warn('my houses', realtor);
+  const filteredHouses = houses.filter((house) => house.address.full.toLowerCase().includes(query.toLowerCase()) || house.listPrice.toLowerCase().includes(query.toLocaleLowerCase()));
 
   return (
     <>
+      <SearchBar query={query} setQuery={setQuery} />
       {realtor ? (<SideBar profile={realtor[0]} />) : (<SideBar profile={client} />)}
-      {houses?.map((house) => <Houses house={house} />)}
+      {filteredHouses?.map((house) => <Houses house={house} />)}
     </>
   );
 }
