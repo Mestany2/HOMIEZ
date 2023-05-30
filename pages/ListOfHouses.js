@@ -26,7 +26,7 @@ export default function ListOfHouses() {
     <>
       <SearchBar query={query} setQuery={setQuery} />
       {realtor ? (<SideBar profile={realtor[0]} />) : (<SideBar profile={client} />)}
-      {filteredHouses?.map((house) => <Houses house={house} />)}
+      {filteredHouses?.map((house) => <Houses house={house} realtor={realtor} />)}
     </>
   );
 }

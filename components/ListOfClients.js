@@ -28,11 +28,11 @@ export default function ListOfClients({ client, onUpdate }) {
               src={client?.client_image}
             />
             {/* </Link> */}
-            <td data-title="Name">{client.client_name}</td>
+            <td data-title="Name">{client?.client_name}</td>
             {/* <td data-title="Link">
               <a href="https://github.com/zavoloklom/material-design-color-palette" target="_blank" rel="noreferrer">GitHub</a>
             </td> */}
-            <td data-title="Status">{client.client_phone}</td>
+            <td data-title="Status">{client?.client_phone}</td>
             <ClientSignUp
               buttonText={<FontAwesomeIcon icon={faEdit} />}
               obj={client}

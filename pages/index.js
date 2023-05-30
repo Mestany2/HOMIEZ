@@ -2,28 +2,36 @@ import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
-import { getRealtorsClients } from '../api/clientsData';
+import { getClientByUid, getRealtorsClients } from '../api/clientsData';
 import ListOfClients from '../components/ListOfClients';
 import { getRealtors } from '../api/realtorData';
 import SideBar from '../components/SideBar';
 import SearchBar from '../components/SearchBar';
+import getHouses from '../api/houseData';
+import Houses from '../components/Houses';
 
 function Home() {
   const [realtors, setRealtors] = useState([]);
   const [clients, setClients] = useState([]);
+  const [client, setClient] = useState({});
+  const [houses, setHouses] = useState([]);
   const [query, setQuery] = useState('');
   const { user } = useAuth();
   useEffect(() => {
     getRealtors().then(setRealtors);
+    getHouses().then(setHouses);
+    getClientByUid(user.uid).then(setClient);
   }, []);
 
   const viewRealtorClients = () => { realtors?.map((realtor) => (getRealtorsClients(realtor?.firebaseKey).then(setClients))); };
-  const filteredClients = clients.filter((client) => client.client_name.toLowerCase().includes(query.toLowerCase()) || client.client_phone.toLowerCase().includes(query.toLocaleLowerCase()));
+  const filteredClients = clients.filter((theClient) => theClient.client_name.toLowerCase().includes(query.toLowerCase()) || theClient.client_phone.toLowerCase().includes(query.toLocaleLowerCase()));
+  const filteredHouses = houses.filter((house) => house.address.full.toLowerCase().includes(query.toLowerCase()) || house.listPrice.toLowerCase().includes(query.toLocaleLowerCase()));
 
   useEffect(() => {
     viewRealtorClients();
   }, [realtors]);
 
+  console.warn('My client', client);
   return (
     <>
       {realtors?.map((realtor) => ((realtor.realtor_uid === user.uid) ? (
@@ -46,7 +54,7 @@ function Home() {
               </thead>
             </table>
           </div>
-          {filteredClients?.map((client) => <ListOfClients key={client.firebaseKey} client={client} onUpdate={viewRealtorClients} />)}
+          {filteredClients?.map((theclient) => <ListOfClients key={theclient.firebaseKey} client={theclient} onUpdate={viewRealtorClients} />)}
         </>
       ) : (
         <>
@@ -55,6 +63,9 @@ function Home() {
           <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
             Sign Out
           </Button>
+          <SearchBar query={query} setQuery={setQuery} />
+          <SideBar client={client[0]} />
+          {filteredHouses?.map((house) => <Houses house={house} />)}
         </>
       )))}
     </>

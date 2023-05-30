@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import { Image } from 'react-bootstrap';
+import { useAuth } from '../utils/context/authContext';
 
-export default function Houses({ house }) {
+export default function Houses({ house, realtor }) {
+  const { user } = useAuth();
   return (
     <div id="bodyflex">
       <div className="card">
@@ -13,7 +15,8 @@ export default function Houses({ house }) {
         <div className="contparent">
           <div className="contchild1">
             <br />
-            <button type="submit" className="Interested"> Interested </button>
+            {realtor?.realtor_uid === user.uid ? ('')
+              : (<button type="submit" className="Interested"> Interested </button>)}
             <br />
             <p className="price">${house.listPrice}</p>
             <p className="address">{house.address.full}</p>
@@ -39,5 +42,8 @@ Houses.propTypes = {
     listPrice: PropTypes.string,
     address: PropTypes.string,
     photos: PropTypes.string,
+  }).isRequired,
+  realtor: PropTypes.shape({
+    realtor_uid: PropTypes.string,
   }).isRequired,
 };
