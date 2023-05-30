@@ -2,8 +2,32 @@ import { clientCredentials } from '../utils/client';
 
 const dbUrl = clientCredentials.databaseURL;
 
-const getRealtorsClients = (rUid) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/clients.json?orderBy="realtor_uid"&equalTo="${rUid}"`, {
+const getRealtorsClients = (rFBK) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/clients.json?orderBy="realtor_id"&equalTo="${rFBK}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
+const getClients = () => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/clients.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
+const getClientByUid = (uid) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/clients.json?orderBy="client_uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -54,7 +78,9 @@ const deleteClient = (firebaseKey) => new Promise((resolve, reject) => {
 
 export {
   addClient,
+  getClients,
   updateClient,
   deleteClient,
   getRealtorsClients,
+  getClientByUid,
 };

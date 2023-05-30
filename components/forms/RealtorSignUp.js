@@ -6,34 +6,30 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FloatingLabel } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { addClient, updateClient } from '../../api/clientsData';
-import { getRealtors } from '../../api/realtorData';
+import { addRealtor, updateRealtor } from '../../api/realtorData';
 
 const initialState = {
-  client_name: '',
-  client_phone: '',
+  realtor_name: '',
+  realtor_phone: '',
+  company_name: '',
 };
 
-export default function ClientSignUp({
-  obj, onUpdate, buttonText,
-}) {
-  const [show, setShow] = useState(false);
+export default function RealtorSignUp({ obj }) {
+  const [show, setShow] = useState(true);
   const [formInput, setFormInput] = useState(initialState);
-  const [realtors, setRealtors] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
 
-  // const handleShow = () => setShow(true);
+  useEffect(() => {
+    if (obj.firebaseKey) setFormInput(obj);
+  }, [obj]);
+
+  //   const handleShow = () => setShow(true);
+
   const handleClose = () => {
     setShow(false);
     router.push('/');
   };
-
-  useEffect(() => {
-    getRealtors().then(setRealtors);
-    if (obj.firebaseKey) setFormInput(obj);
-    if (!obj.firebaseKey) setShow(true);
-  }, [obj, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,18 +42,19 @@ export default function ClientSignUp({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
-      updateClient(formInput).then(() => {
-        onUpdate();
+      updateRealtor(formInput).then(() => {
+        // onUpdate();
         handleClose();
       });
     } else {
       const payload = {
-        ...formInput, client_uid: user.uid, client_image: user.photoURL,
+        ...formInput, realtor_uid: user.uid, realtor_image: user.photoURL,
       };
-      addClient(payload).then(({ name }) => {
+      addRealtor(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
-        updateClient(patchPayload).then(() => {
+        updateRealtor(patchPayload).then(() => {
           handleClose();
+        // setFormInput(initialState);
         });
       });
     }
@@ -65,18 +62,23 @@ export default function ClientSignUp({
 
   return (
     <>
-      {obj.firebaseKey ? (
-        <Button
-          className="bg-transparent border-0 fields"
-          onClick={() => setShow(true)}
-        >
-          {buttonText}
-        </Button>
-      ) : ''}
+      {/* <Button
+        variant="primary"
+        className="modalForm"
+        onClick={handleShow}
+        // style={{
+        //   backgroundColor: bc,
+        //   color: colorSet,
+        //   border: borderSet,
+        //   fontSize: fontSet,
+        // }}
+      >
+        Test
+      </Button> */}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{obj.firebaseKey ? 'Update' : 'Create'} an Account </Modal.Title>
+          <Modal.Title>{obj.firebaseKey ? 'Update' : 'Create'} a Realtor Account </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
@@ -85,8 +87,8 @@ export default function ClientSignUp({
               <Form.Control
                 type="text"
                 placeholder="Your Name"
-                name="client_name"
-                value={formInput.client_name}
+                name="realtor_name"
+                value={formInput.realtor_name}
                 onChange={handleChange}
                 required
               />
@@ -97,34 +99,22 @@ export default function ClientSignUp({
               <Form.Control
                 type="text"
                 placeholder="Phone Number"
-                name="client_phone"
-                value={formInput.client_phone}
+                name="realtor_phone"
+                value={formInput.realtor_phone}
                 onChange={handleChange}
                 required
               />
             </FloatingLabel>
 
-            <FloatingLabel controlId="floatingSelect" label="Realtor">
-              <Form.Select
-                aria-label="Realtor"
-                name="realtor_id"
+            <FloatingLabel controlId="floatingInput1" label="Company" className="mb-3" style={{ color: 'black' }}>
+              <Form.Control
+                type="text"
+                placeholder="Company Name"
+                name="company_name"
+                value={formInput.company_name}
                 onChange={handleChange}
-                className="mb-3"
-                value={formInput.realtor_id} // FIXME: modify code to remove error
                 required
-              >
-                <option value="">Select Your Realtor</option>
-                {
-            realtors.map((realtor) => (
-              <option
-                key={realtor.firebaseKey}
-                value={realtor.firebaseKey}
-              >
-                {realtor.realtor_name}
-              </option>
-            ))
-          }
-              </Form.Select>
+              />
             </FloatingLabel>
 
             <Button type="submit">{obj.firebaseKey ? 'Update' : 'Submit'}</Button>
@@ -136,16 +126,14 @@ export default function ClientSignUp({
   );
 }
 
-ClientSignUp.propTypes = {
+RealtorSignUp.propTypes = {
   obj: PropTypes.shape({
     firebaseKey: PropTypes.string,
     user_photo: PropTypes.string,
     userName: PropTypes.string,
   }),
-  onUpdate: PropTypes.func.isRequired,
-  buttonText: PropTypes.func.isRequired,
 };
 
-ClientSignUp.defaultProps = {
+RealtorSignUp.defaultProps = {
   obj: initialState,
 };
