@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 import { Image } from 'react-bootstrap';
+import { useState } from 'react';
 import { useAuth } from '../utils/context/authContext';
 import { addInterestedHouses, updateInterestedHouses } from '../api/interested';
 
 export default function Houses({ house, realtor, client }) {
   const { user } = useAuth();
+  const [isInterested, setIsInterested] = useState(false);
+
   const handleSubmit = () => {
     const payload = {
       client_fbk: client[0].firebaseKey, house_id: house.listingId,
@@ -12,6 +15,7 @@ export default function Houses({ house, realtor, client }) {
     addInterestedHouses(payload).then(({ name }) => {
       const patchPayload = { firebaseKey: name };
       updateInterestedHouses(patchPayload);
+      setIsInterested(true);
     });
   };
 
@@ -27,7 +31,16 @@ export default function Houses({ house, realtor, client }) {
           <div className="contchild1">
             <br />
             {realtor?.realtor_uid === user.uid ? ('')
-              : (<button type="submit" className="Interested" onClick={handleSubmit}> Interested </button>)}
+              : (
+                <button
+                  type="submit"
+                  className={`Interested${isInterested ? ' interested' : ''}`}
+                  onClick={handleSubmit}
+                  disabled={isInterested}
+                >
+                  {isInterested ? 'Added' : 'Interested'}
+                </button>
+              )}
             <br />
             <p className="price">${house?.listPrice}</p>
             <p className="address">{house?.address.full}</p>
