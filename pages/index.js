@@ -7,7 +7,7 @@ import ListOfClients from '../components/ListOfClients';
 import { getRealtors } from '../api/realtorData';
 import SideBar from '../components/SideBar';
 import SearchBar from '../components/SearchBar';
-import getHouses from '../api/houseData';
+import { getHouses } from '../api/houseData';
 import Houses from '../components/Houses';
 
 function Home() {
@@ -31,7 +31,6 @@ function Home() {
     viewRealtorClients();
   }, [realtors]);
 
-  console.warn('My client', client);
   return (
     <>
       {realtors?.map((realtor) => ((realtor.realtor_uid === user.uid) ? (
@@ -65,7 +64,7 @@ function Home() {
           </Button>
           <SearchBar query={query} setQuery={setQuery} />
           <SideBar client={client[0]} />
-          {filteredHouses?.map((house) => <Houses house={house} />)}
+          {filteredHouses?.map((house) => <Houses house={house} realtor={realtor} client={client} />)}
         </>
       )))}
     </>

@@ -38,6 +38,30 @@ const getClientByUid = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getClientByFbk = (clientFbk) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/clients.json?orderBy="firebaseKey"&equalTo="${clientFbk}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
+const getClientHouses = (clientFbk) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/interested.json?orderBy="client_fbk"&equalTo="${clientFbk}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 const addClient = (payload) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/clients.json`, {
     method: 'POST',
@@ -83,4 +107,6 @@ export {
   deleteClient,
   getRealtorsClients,
   getClientByUid,
+  getClientByFbk,
+  getClientHouses,
 };
