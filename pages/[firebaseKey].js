@@ -5,6 +5,8 @@ import SideBar from '../components/SideBar';
 import { getClientByFbk, getClientHouses } from '../api/clientsData';
 import SearchBar from '../components/SearchBar';
 import { getHousesByHouseId } from '../api/houseData';
+import { useAuth } from '../utils/context/authContext';
+import { getRealtorByUid } from '../api/realtorData';
 
 const initialValues = {
   listOfHomes: [],
@@ -13,15 +15,17 @@ const initialValues = {
 export default function InterestedPage() {
   const router = useRouter();
   const { firebaseKey } = router.query;
-  // const [realtor, setRealtors] = useState([]);
+  const [realtor, setRealtor] = useState([]);
   const [houses, setHouses] = useState(initialValues);
   const [intHouses, setIntHouses] = useState([]);
   const [client, setClient] = useState([{}]);
   const [query, setQuery] = useState('');
+  const { user } = useAuth();
 
   useEffect(() => {
     getClientByFbk(firebaseKey).then(setClient);
     getClientHouses(firebaseKey).then(setIntHouses);
+    getRealtorByUid(user.uid).then(setRealtor);
   }, [firebaseKey]);
 
   useEffect(() => {
@@ -49,7 +53,7 @@ export default function InterestedPage() {
   return (
     <>
       <SearchBar query={query} setQuery={setQuery} />
-      <SideBar client={client[0]} />
+      {client.client_uid === user.uid ? (<SideBar client={client[0]} />) : <SideBar profile={realtor[0]} />}
       {filteredHouses.map((house) => <Houses house={house} client={client[0]} />)}
     </>
   );

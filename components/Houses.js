@@ -30,7 +30,7 @@ export default function Houses({ house, realtor, client }) {
         <div className="contparent">
           <div className="contchild1">
             <br />
-            {realtor?.realtor_uid === user.uid ? ('')
+            {realtor?.realtor_uid === user.uid ? (<></>)
               : (
                 <button
                   type="submit"

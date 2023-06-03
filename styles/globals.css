@@ -124,6 +124,7 @@ video#bgvideo {
 .fixed_headers {
   width: 750px;
   table-layout: fixed;
+  margin-left: 3.5%;
   border-collapse: collapse;
 
 };
@@ -133,7 +134,7 @@ td {
   text-align: left;
 }
 .clientProf{
-  margin-left: 3rem;
+  margin-left: 2rem;
   margin-top: 1rem;
 }
 .fields{
@@ -204,8 +205,11 @@ h3 {
   /* flex-wrap:wrap ; */
   margin-bottom: 1rem;
   margin-left: 0rem;
-  margin-right: -10rem;
+  margin-right: -15rem;
   width: 30vw;
+}
+#table{
+  margin-left: 10%;
 }
 
 .Interested {
@@ -224,7 +228,7 @@ h3 {
               -6px -6px 12px #ffffff;
  }
  
- button::before {
+ .Interested::before {
   content: '';
   width: 0;
   height: 3em;
@@ -238,7 +242,94 @@ h3 {
   z-index: -1;
  }
  
- button:hover::before {
+ .Interested:hover::before {
   width: 9em;
  }
+ .searchbar{
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 60px;
+  background-color: #353b48;
+  border-radius: 30px;
+  padding: 10px;
+  }
 
+  .search_input{
+  color: white;
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 0;
+  caret-color:transparent;
+  line-height: 40px;
+  transition: width 0.4s linear;
+  }
+
+  .searchbar:hover > .search_input{
+  padding: 0 10px;
+  width: 450px;
+  caret-color:red;
+  transition: width 0.4s linear;
+  }
+
+  .searchbar:hover > .search_icon{
+  background: white;
+  color: #e74c3c;
+  }
+
+  .search_icon{
+  height: 40px;
+  width: 40px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color:white;
+  text-decoration:none;
+  /* margin-top: -2.5rem; */
+  }
+  #Profile-logo{
+    display: block;
+    float: right;
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    z-index: 2;
+    float: right;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
+    background-color: white;
+    z-index:100
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    padding: 8px 12px;
+  }
+  
+  li:hover {
+    background-color: rgba(0, 0, 0, 0.14);
+    cursor: pointer;
+  }
+  
+  #drop-btn{
+    border: 0;
+    border-radius: 250px
+    
+  }
+  .navbar{
+    width: 138%;
+  }
+  .container{
+    margin-left: 10%;
+    margin-right: -10%;
+  }

@@ -1,6 +1,4 @@
-import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import { getClientByUid, getRealtorsClients } from '../api/clientsData';
 import ListOfClients from '../components/ListOfClients';
@@ -36,9 +34,6 @@ function Home() {
       {realtors?.map((realtor) => ((realtor.realtor_uid === user.uid) ? (
         <>
           <SearchBar query={query} setQuery={setQuery} />
-          <Button variant="danger" type="button" size="lg" className="signoutbtn" onClick={signOut}>
-            Sign Out
-          </Button>
           <SideBar profile={realtor} />
           <div>Hello Realtor</div><h1>Hello {user.displayName}! </h1>
           <div className="fixed_headers">
@@ -57,12 +52,9 @@ function Home() {
         </>
       ) : (
         <>
+          <SearchBar query={query} setQuery={setQuery} />
           <div>Hello Client</div>
           <h1>Hello {user.displayName}! </h1>
-          <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-            Sign Out
-          </Button>
-          <SearchBar query={query} setQuery={setQuery} />
           <SideBar client={client[0]} />
           {filteredHouses?.map((house) => <Houses house={house} realtor={realtor} client={client} />)}
         </>
