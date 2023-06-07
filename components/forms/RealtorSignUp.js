@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FloatingLabel } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { addRealtor, updateRealtor } from '../../api/realtorData';
+import { addRealtor, getRealtorByUid, updateRealtor } from '../../api/realtorData';
 
 const initialState = {
   realtor_name: '',
@@ -50,12 +50,18 @@ export default function RealtorSignUp({ obj }) {
       const payload = {
         ...formInput, realtor_uid: user.uid, realtor_image: user.photoURL,
       };
-      addRealtor(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateRealtor(patchPayload).then(() => {
+      getRealtorByUid(user.uid).then((realtorExist) => {
+        if (realtorExist.length > 0) {
+          window.confirm('Realtor Exist');
           handleClose();
-        // setFormInput(initialState);
-        });
+        } else {
+          addRealtor(payload).then(({ name }) => {
+            const patchPayload = { firebaseKey: name };
+            updateRealtor(patchPayload).then(() => {
+              handleClose();
+            });
+          });
+        }
       });
     }
   };

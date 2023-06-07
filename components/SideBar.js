@@ -16,13 +16,17 @@ const SideBar = ({ profile, client }) => (
 export default SideBar;
 
 SideBar.propTypes = {
-  profile: PropTypes.shape({
+  profile: PropTypes.arrayOf({
     realtor_image: PropTypes.string,
     realtor_name: PropTypes.string,
-  }).isRequired,
+  }),
   client: PropTypes.shape({
     client_image: PropTypes.string,
     client_name: PropTypes.string,
     firebaseKey: PropTypes.string,
-  }).isRequired,
+  }),
+};
+SideBar.defaultProps = {
+  client: '',
+  profile: '',
 };

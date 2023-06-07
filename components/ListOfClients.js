@@ -19,15 +19,17 @@ export default function ListOfClients({ client, onUpdate }) {
       <table id="table" className="fixed_headers">
         <tbody>
           <tr>
-            <Link passHref href={`${client?.firebaseKey}`}>
-              <Image
-                style={{
-                  width: '4rem', height: '100', borderRadius: '100px',
-                }}
-                className="clientProf"
-                src={client?.client_image}
-              />
-            </Link>
+            <td>
+              <Link passHref href={`${client?.firebaseKey}`}>
+                <Image
+                  style={{
+                    width: '4rem', height: '100', borderRadius: '100px',
+                  }}
+                  className="clientProf"
+                  src={client?.client_image}
+                />
+              </Link>
+            </td>
             <td data-title="Name">{client?.client_name}</td>
             <td data-title="Status">{client?.client_phone}</td>
             <td>
