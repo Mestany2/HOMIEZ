@@ -9,7 +9,7 @@ import ClientSignUp from './forms/ClientSignUp';
 
 export default function ListOfClients({ client, onUpdate }) {
   const deleteClientFromList = () => {
-    if (window.confirm(`Delete ${client.client_name} from your playlist?`)) {
+    if (window.confirm(`Delete ${client.client_name} from your list?`)) {
       deleteClient(client.firebaseKey).then(() => onUpdate());
     }
   };

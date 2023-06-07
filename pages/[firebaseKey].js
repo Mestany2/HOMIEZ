@@ -18,7 +18,7 @@ export default function InterestedPage() {
   const [realtor, setRealtor] = useState([]);
   const [houses, setHouses] = useState(initialValues);
   const [intHouses, setIntHouses] = useState([]);
-  const [client, setClient] = useState([{}]);
+  const [client, setClient] = useState([]);
   const [query, setQuery] = useState('');
   const { user } = useAuth();
 
@@ -46,14 +46,14 @@ export default function InterestedPage() {
     fetchHouses();
   }, [intHouses]);
 
-  console.warn('list of houses', houses);
+  console.warn('list the int client', client[0]);
 
   const filteredHouses = houses.listOfHomes.filter((house) => house?.address?.full.toLowerCase().includes(query.toLowerCase()) || house?.listPrice?.toLowerCase().includes(query.toLocaleLowerCase()));
 
   return (
     <>
       <SearchBar query={query} setQuery={setQuery} />
-      {client.client_uid === user.uid ? (<SideBar client={client[0]} />) : <SideBar profile={realtor[0]} />}
+      {client?.client_uid === user.uid ? (<SideBar client={client[0]} />) : <SideBar profile={realtor[0]} />}
       {filteredHouses.map((house) => <Houses house={house} client={client[0]} />)}
     </>
   );

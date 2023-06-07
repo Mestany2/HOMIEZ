@@ -7,8 +7,8 @@ const SideBar = ({ profile, client }) => (
   <>
     <div className="side-bar">
       <br />
-      {profile ? (<><Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={profile?.realtor_image} /><h5>{profile?.realtor_name }</h5><br /><Link passHref href="/ListOfHouses" className="links"> View Homes </Link><br /><br /><Link passHref href="/"> My Clients </Link><br /><hr className="seperator" /></>)
-        : (<><Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={client?.client_image} /><h5>{client?.client_name}</h5><br /><Link passHref href="/ListOfHouses" className="links"> View Homes </Link><br /><br /><Link passHref href={`${client?.firebaseKey}`}> Interested</Link><br /><hr className="seperator" /></>)}
+      {profile ? (<><Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={profile?.realtor_image} /><h5>{profile?.realtor_name }</h5><br /><Link passHref href="/ListOfHouses" className="links"> View Homes </Link><br /><br /><Link passHref href="/"> My Clients </Link><br /></>)
+        : (<><Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={client?.client_image} /><h5>{client?.client_name}</h5><br /><Link passHref href="/ListOfHouses" className="links"> View Homes </Link><br /><br /><Link passHref href={`${client?.firebaseKey}`}> My List of Homes</Link><br /></>)}
 
     </div>
   </>
@@ -16,7 +16,7 @@ const SideBar = ({ profile, client }) => (
 export default SideBar;
 
 SideBar.propTypes = {
-  profile: PropTypes.arrayOf({
+  profile: PropTypes.shape({
     realtor_image: PropTypes.string,
     realtor_name: PropTypes.string,
   }),

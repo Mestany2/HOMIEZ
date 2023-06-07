@@ -15,7 +15,7 @@ export default function SearchBar({ query, setQuery }) {
 
   return (
     <>
-      <Navbar className="navbar navbar-icon-top navbar-expand-lg navbar-light bg-light">
+      <Navbar className="navbar navbar-icon-top navbar-expand-lg">
         <Navbar.Brand>
           <Image src="./HomiezLogo.png" alt="logo" style={{ width: 175, marginTop: 5, marginLeft: 0 }} />
         </Navbar.Brand>
@@ -27,7 +27,7 @@ export default function SearchBar({ query, setQuery }) {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <Link className="nav-link" passHref href="/">
-                <FontAwesomeIcon icon={faHouse}> </FontAwesomeIcon>
+                <FontAwesomeIcon icon={faHouse}>  </FontAwesomeIcon>
               </Link>
               Home
             </li>
@@ -48,9 +48,9 @@ export default function SearchBar({ query, setQuery }) {
             <Image
               id="Logo"
               src={user.photoURL}
-              border-radius="250px"
-              height="37"
-              width="37"
+              className="rounded-circle"
+              height="47"
+              width="47"
             />
           </button>
           {open && (
@@ -65,6 +65,7 @@ export default function SearchBar({ query, setQuery }) {
           )}
         </div>
       </Navbar>
+      <hr className="navhr" />
     </>
   );
 }
