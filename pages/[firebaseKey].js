@@ -54,7 +54,7 @@ export default function InterestedPage() {
     <>
       <SearchBar query={query} setQuery={setQuery} />
       {client?.client_uid === user.uid ? (<SideBar client={client[0]} />) : <SideBar profile={realtor[0]} />}
-      {filteredHouses.map((house) => <Houses house={house} client={client[0]} />)}
+      {filteredHouses.map((house) => <Houses house={house} realtor={realtor} client={client[0]} />)}
     </>
   );
 }
