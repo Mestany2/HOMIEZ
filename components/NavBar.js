@@ -6,12 +6,9 @@ import {
 } from 'react-bootstrap';
 import { signIn, signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
-import useFirebaseProfile from '../utils/hook/useFirebaseProfile';
 
 export default function NavBar() {
   const { user } = useAuth();
-  const profiles = useFirebaseProfile();
-  console.warn('here it is', profiles);
 
   return (
     <Navbar collapseOnSelect>

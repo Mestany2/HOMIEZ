@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FloatingLabel } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { addClient, updateClient } from '../../api/clientsData';
+import { addClient, getClientByUid, updateClient } from '../../api/clientsData';
 import { getRealtors } from '../../api/realtorData';
 
 const initialState = {
@@ -54,11 +54,18 @@ export default function ClientSignUp({
       const payload = {
         ...formInput, client_uid: user.uid, client_image: user.photoURL,
       };
-      addClient(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateClient(patchPayload).then(() => {
+      getClientByUid(user.uid).then((clientExist) => {
+        if (clientExist.length > 0) {
+          window.confirm('User Exist');
           handleClose();
-        });
+        } else {
+          addClient(payload).then(({ name }) => {
+            const patchPayload = { firebaseKey: name };
+            updateClient(patchPayload).then(() => {
+              handleClose();
+            });
+          });
+        }
       });
     }
   };
