@@ -18,7 +18,7 @@ export default function Houses({ house, realtor, client }) {
       setIsInterested(true);
     });
   };
-
+  console.warn('Houses', house);
   return (
     <div id="bodyflex">
       <div className="card">
@@ -30,7 +30,7 @@ export default function Houses({ house, realtor, client }) {
         <div className="contparent">
           <div className="contchild1">
             <br />
-            {realtor?.realtor_uid === user.uid ? (<></>)
+            {(realtor[0]?.realtor_uid === user.uid) ? (<></>)
               : (
                 <button
                   type="submit"
@@ -47,12 +47,8 @@ export default function Houses({ house, realtor, client }) {
           </div>
           <div className="contchild2">
             <div className="cc21">
-              <i className="large material-icons">hotel</i>
-              <p className="grey"><span>3</span> Bedrooms</p>
-            </div>
-            <div className="cc22">
-              <i className="large material-icons">hot_tub</i>
-              <p className="grey"><span>2</span> Bathrooms</p>
+              <i className="large material-icons"> {house?.mls.status}</i>
+              <p className="grey"><span>{house?.property.bedrooms}</span> Bedrooms <span>{house?.property.bathsFull}</span> Bathrooms</p>
             </div>
           </div>
         </div>
@@ -70,8 +66,12 @@ Houses.propTypes = {
   }).isRequired,
   realtor: PropTypes.shape({
     realtor_uid: PropTypes.string,
-  }).isRequired,
+  }),
   client: PropTypes.shape({
     firebaseKey: PropTypes.string,
-  }).isRequired,
+  }),
+};
+Houses.defaultProps = {
+  realtor: '',
+  client: '',
 };

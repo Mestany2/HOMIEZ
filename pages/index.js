@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Nav } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
 import { getClientByUid, getRealtorsClients } from '../api/clientsData';
@@ -28,7 +28,7 @@ function Home() {
   }, [user]);
 
   const onUpdateClients = () => {
-    realtors.map((realtorList) => getRealtorsClients(realtorList.firebaseKey).then(setClients));
+    realtors?.map((realtorList) => getRealtorsClients(realtorList.firebaseKey).then(setClients));
   };
   const viewRealtorClients = () => {
     realtors?.map((aRealtor) => getRealtorsClients(aRealtor?.firebaseKey).then((clientss) => {
@@ -48,7 +48,7 @@ function Home() {
 
   useEffect(() => {
     viewRealtorClients();
-  }, [realtor]);
+  }, [realtors]);
 
   if (realtors && realtors.some((oneRealtor) => oneRealtor.realtor_uid === user.uid)) {
     return (
@@ -56,7 +56,7 @@ function Home() {
         <SearchBar query={query} setQuery={setQuery} />
         <SideBar profile={realtor[0]} />
         <br />
-        <h1>Hello {user.displayName}!</h1>
+        <h2>Hello {user.displayName}!</h2>
         <div className="fixed_headers">
           <table id="table" className="table table-hover table-mc-light-blue">
             <thead>
@@ -69,7 +69,7 @@ function Home() {
             </thead>
           </table>
         </div>
-        {filteredClients.map((theclient) => (
+        {filteredClients?.map((theclient) => (
           <ListOfClients key={theclient.firebaseKey} client={theclient} onUpdate={onUpdateClients} />
         ))}
       </div>
@@ -89,14 +89,57 @@ function Home() {
   return (
     <div>
       <SearchBar query={query} setQuery={setQuery} />
-      <Nav className="me-auto">
+      <div>
+        {/* <h2>Please Sign Up</h2>
         <Link passHref href="/realtorForm">
-          <Nav.Link className="signupbtn" onClick={signIn}>Agent Sign Up</Nav.Link>
+          <Button className="signupbtn" onClick={signIn}>Agent Sign Up </Button>
         </Link>
         <Link passHref href="/clientForm">
-          <Nav.Link className="signupbtn" onClick={signIn}>Client Sign Up</Nav.Link>
-        </Link>
-      </Nav>
+          <Button className="signupbtn" onClick={signIn}>Client Sign Up </Button>
+        </Link> */}
+        <div className="cotn_principal">
+          <div className="cont_centrar">
+
+            <div className="cont_login">
+              <div className="cont_info_log_sign_up">
+                <div className="col_md_login">
+                  <div className="cont_ba_opcitiy">
+                    <h2>Agent Sign Up</h2>
+                    <p>Account Not Found, Please Sign Up Here As An Agnet</p>
+                    <Link passHref href="/realtorForm">
+                      <Button variant="success" className="signupbtnform" onClick={signIn}>Agent Sign Up </Button>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col_md_sign_up">
+                  <div className="cont_ba_opcitiy">
+                    <h2>Client Sign Up</h2>
+
+                    <p>Account Not Found, Please Sign Up Here As A Client</p>
+
+                    <Link passHref href="/clientForm">
+                      <Button variant="secondary" className="signupbtnform" onClick={signIn}>Client Sign Up </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="cont_back_info">
+                <div className="cont_img_back_grey">
+                  <img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />
+                </div>
+              </div>
+              <div className="cont_forms">
+                <div className="cont_img_back_">
+                  <img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

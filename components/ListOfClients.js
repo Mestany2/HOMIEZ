@@ -15,47 +15,51 @@ export default function ListOfClients({ client, onUpdate }) {
   };
 
   return (
-    <div className="table-responsive-vertical shadow-z-1">
-      <table id="table" className="fixed_headers">
-        <tbody>
-          <tr>
-            <td>
-              <Link passHref href={`${client?.firebaseKey}`}>
-                <Image
-                  style={{
-                    width: '4rem', height: '100', borderRadius: '100px',
-                  }}
-                  className="clientProf"
-                  src={client?.client_image}
+    <>
+      <div className="table-responsive-vertical shadow-z-1">
+        <table id="table" className="fixed_headers">
+          <tbody>
+            <tr>
+              <td>
+                <figure>
+                  <Link passHref href={`${client?.firebaseKey}`}>
+                    <Image
+                      style={{
+                        width: '4rem', height: '100', borderRadius: '100px',
+                      }}
+                      className="clientProf"
+                      src={client?.client_image}
+                    />
+                  </Link>
+                </figure>
+              </td>
+              <td data-title="Name"><p>{client?.client_name}</p></td>
+              <td data-title="Status"><p>{client?.client_phone}</p></td>
+              <td>
+                <ClientSignUp
+                  buttonText={<FontAwesomeIcon icon={faEdit} />}
+                  obj={client}
+                  onUpdate={onUpdate}
                 />
-              </Link>
-            </td>
-            <td data-title="Name">{client?.client_name}</td>
-            <td data-title="Status">{client?.client_phone}</td>
-            <td>
-              <ClientSignUp
-                buttonText={<FontAwesomeIcon icon={faEdit} />}
-                obj={client}
-                onUpdate={onUpdate}
-              />
-              <Button
-                className="fields"
-                onClick={deleteClientFromList}
-                style={{
-                  height: '40px',
-                  width: '40px',
-                  backgroundColor: 'transparent',
-                  color: 'red',
-                  border: 'none',
-                }}
-              >
-                <FontAwesomeIcon icon={faTrash} />
-              </Button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+                <Button
+                  className="fields"
+                  onClick={deleteClientFromList}
+                  style={{
+                    height: '40px',
+                    width: '40px',
+                    backgroundColor: 'transparent',
+                    color: 'red',
+                    border: 'none',
+                  }}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </Button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </>
 
   );
 }
