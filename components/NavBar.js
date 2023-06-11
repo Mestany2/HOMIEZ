@@ -21,7 +21,9 @@ export default function NavBar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           {user ? (
-            <Button id="signoutbtn" onClick={signOut}>Sign Out</Button>
+            <Link passHref href="/">
+              <Button id="signoutbtn" onClick={signOut}>Sign Out</Button>
+            </Link>
           ) : (
             <Nav className="me-auto">
               <Link passHref href="/realtorForm">
