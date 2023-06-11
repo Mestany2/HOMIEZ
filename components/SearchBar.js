@@ -59,7 +59,11 @@ export default function SearchBar({ query, setQuery }) {
                 <Link passHref href="/">
                   <li>Home</li>
                 </Link>
-                <li><button type="button" id="drop-btn" onClick={signOut}> Sign Out</button></li>
+                <li>
+                  <Link passHref href="/">
+                    <button type="button" id="drop-btn" onClick={signOut}> Sign Out</button>
+                  </Link>
+                </li>
               </ul>
             </div>
           )}
