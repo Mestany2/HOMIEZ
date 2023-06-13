@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types';
-import { Image } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { faBath, faBed } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../utils/context/authContext';
-import { addInterestedHouses, updateInterestedHouses } from '../api/interested';
+import {
+  addInterestedHouses, deleteInterestedHouse, getIntHouse, updateInterestedHouses,
+} from '../api/interested';
 
-export default function Houses({ house, realtor, client }) {
+export default function Houses({
+  int, house, realtor, client, onUpdate,
+}) {
   const { user } = useAuth();
   const [isInterested, setIsInterested] = useState(false);
 
@@ -18,7 +26,14 @@ export default function Houses({ house, realtor, client }) {
       setIsInterested(true);
     });
   };
-  console.warn('Houses', house);
+
+  const deleteHouseInterestedList = () => {
+    if (window.confirm('Delete this house from your list?')) {
+      getIntHouse(house?.listingId).then((oneHouse) => { deleteInterestedHouse(oneHouse[0]?.firebaseKey); });
+    }
+    onUpdate();
+  };
+  console.warn('The client', client);
   return (
     <div id="bodyflex">
       <div className="card">
@@ -30,7 +45,7 @@ export default function Houses({ house, realtor, client }) {
         <div className="contparent">
           <div className="contchild1">
             <br />
-            {(realtor[0]?.realtor_uid === user.uid) ? (<></>)
+            {(realtor[0]?.realtor_uid === user.uid || int) ? (<></>)
               : (
                 <button
                   type="submit"
@@ -48,9 +63,10 @@ export default function Houses({ house, realtor, client }) {
           <div className="contchild2">
             <div className="cc21">
               <i className="large material-icons"> {house?.mls.status}</i>
-              <p className="grey"><span>{house?.property.bedrooms}</span> Bedrooms <span>{house?.property.bathsFull}</span> Bathrooms</p>
+              <p className="grey"><span><FontAwesomeIcon icon={faBed} /> {house?.property.bedrooms}</span> Bedrooms <span><FontAwesomeIcon icon={faBath} /> {house?.property.bathsFull}</span> Bathrooms</p>
             </div>
           </div>
+          {(int && client?.client_uid === user.uid) ? <Button className="w-100 ml " variant="danger" onClick={deleteHouseInterestedList}>Delete</Button> : '' }
         </div>
       </div>
     </div>
@@ -69,9 +85,13 @@ Houses.propTypes = {
   }),
   client: PropTypes.shape({
     firebaseKey: PropTypes.string,
+    client_uid: PropTypes.string,
   }),
+  int: PropTypes.arrayOf,
+  onUpdate: PropTypes.func.isRequired,
 };
 Houses.defaultProps = {
   realtor: '',
   client: '',
+  int: '',
 };

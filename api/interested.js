@@ -14,6 +14,18 @@ const getInterestedHouses = (clientFbk) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getIntHouse = (houseId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/interested.json?orderBy="house_id"&equalTo="${houseId}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 const addInterestedHouses = (payload) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/interested.json`, {
     method: 'POST',
@@ -40,4 +52,17 @@ const updateInterestedHouses = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getInterestedHouses, addInterestedHouses, updateInterestedHouses };
+const deleteInterestedHouse = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/interested/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+export {
+  getInterestedHouses, addInterestedHouses, updateInterestedHouses, deleteInterestedHouse, getIntHouse,
+};

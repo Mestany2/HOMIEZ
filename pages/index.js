@@ -28,14 +28,13 @@ function Home() {
   }, [user]);
 
   const onUpdateClients = () => {
-    realtors?.map((realtorList) => getRealtorsClients(realtorList.firebaseKey).then(setClients));
+    getRealtorsClients(realtor[0]?.firebaseKey).then(setClients);
   };
   const viewRealtorClients = () => {
-    realtors?.map((aRealtor) => getRealtorsClients(aRealtor?.firebaseKey).then((clientss) => {
+    getRealtorsClients(realtor[0]?.firebaseKey).then((clientss) => {
       setClients((prevClients) => [...prevClients, ...clientss]);
-    }));
+    });
   };
-
   const filteredClients = clients.filter(
     (theClient) => theClient.client_name.toLowerCase().includes(query.toLowerCase())
       || theClient.client_phone.toLowerCase().includes(query.toLowerCase()),
@@ -48,7 +47,7 @@ function Home() {
 
   useEffect(() => {
     viewRealtorClients();
-  }, [realtors]);
+  }, [realtor]);
 
   if (realtors && realtors.some((oneRealtor) => oneRealtor.realtor_uid === user.uid)) {
     return (
