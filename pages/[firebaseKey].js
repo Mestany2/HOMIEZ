@@ -28,7 +28,10 @@ export default function InterestedPage() {
     getRealtorByUid(user.uid).then(setRealtor);
   }, [firebaseKey]);
 
-  useEffect(() => {
+  const getAllIntHouses = () => {
+    getClientByFbk(firebaseKey).then(setClient);
+    getClientHouses(firebaseKey).then(setIntHouses);
+    getRealtorByUid(user.uid).then(setRealtor);
     if (intHouses.length === 0) return;
 
     const fetchHouses = async () => {
@@ -44,7 +47,11 @@ export default function InterestedPage() {
     };
 
     fetchHouses();
-  }, [intHouses]);
+  };
+  useEffect(
+    getAllIntHouses,
+    [intHouses],
+  );
 
   console.warn('list the int client', intHouses);
 
@@ -54,7 +61,7 @@ export default function InterestedPage() {
     <>
       <SearchBar query={query} setQuery={setQuery} />
       {client?.client_uid === user.uid ? <SideBar client={client[0]} /> : <SideBar profile={realtor[0]} />}
-      {filteredHouses.map((house) => <Houses int={intHouses} house={house} realtor={realtor} client={client[0]} />)}
+      {filteredHouses.map((house) => <Houses int={intHouses} house={house} realtor={realtor} client={client[0]} onUpdate={getAllIntHouses} />)}
     </>
   );
 }
