@@ -40,4 +40,17 @@ const updateInterestedHouses = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getInterestedHouses, addInterestedHouses, updateInterestedHouses };
+const deleteInterestedHouse = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/interested/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+export {
+  getInterestedHouses, addInterestedHouses, updateInterestedHouses, deleteInterestedHouse,
+};

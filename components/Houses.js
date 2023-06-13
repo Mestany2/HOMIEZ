@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
-import { Image } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import { useAuth } from '../utils/context/authContext';
-import { addInterestedHouses, updateInterestedHouses } from '../api/interested';
+import { addInterestedHouses, deleteInterestedHouse, updateInterestedHouses } from '../api/interested';
 
-export default function Houses({ house, realtor, client }) {
+export default function Houses({
+  int, house, realtor, client,
+}) {
   const { user } = useAuth();
   const [isInterested, setIsInterested] = useState(false);
 
@@ -18,7 +20,12 @@ export default function Houses({ house, realtor, client }) {
       setIsInterested(true);
     });
   };
-  console.warn('Houses', house);
+  const deleteHouseInterestedList = () => {
+    if (window.confirm('Delete this house from your list?')) {
+      deleteInterestedHouse(house?.firebaseKey);
+    }
+  };
+  console.warn('Houses', int);
   return (
     <div id="bodyflex">
       <div className="card">
@@ -49,6 +56,7 @@ export default function Houses({ house, realtor, client }) {
             <div className="cc21">
               <i className="large material-icons"> {house?.mls.status}</i>
               <p className="grey"><span>{house?.property.bedrooms}</span> Bedrooms <span>{house?.property.bathsFull}</span> Bathrooms</p>
+              {int ? <Button className="w-100 ml " onClick={deleteHouseInterestedList}>Delete</Button> : 'test' }
             </div>
           </div>
         </div>
@@ -70,8 +78,10 @@ Houses.propTypes = {
   client: PropTypes.shape({
     firebaseKey: PropTypes.string,
   }),
+  int: PropTypes.arrayOf,
 };
 Houses.defaultProps = {
   realtor: '',
   client: '',
+  int: '',
 };
