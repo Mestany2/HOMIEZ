@@ -56,7 +56,7 @@ export default function ClientSignUp({
       };
       getClientByUid(user.uid).then((clientExist) => {
         if (clientExist.length > 0) {
-          window.confirm('User Exist');
+          window.confirm('You Already Have An Account, You Will Be Logged In!');
           handleClose();
         } else {
           addClient(payload).then(({ name }) => {
