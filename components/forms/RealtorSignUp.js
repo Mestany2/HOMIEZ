@@ -52,7 +52,7 @@ export default function RealtorSignUp({ obj }) {
       };
       getRealtorByUid(user.uid).then((realtorExist) => {
         if (realtorExist.length > 0) {
-          window.confirm('Realtor Exist');
+          window.confirm('Hello Realtor! You Already Have An Account, You Will Be Logged In! ');
           handleClose();
         } else {
           addRealtor(payload).then(({ name }) => {
