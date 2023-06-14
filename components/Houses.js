@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { faBath, faBed } from '@fortawesome/free-solid-svg-icons';
+import Carousel from 'react-bootstrap/Carousel';
 import { useAuth } from '../utils/context/authContext';
 import {
   addInterestedHouses, deleteInterestedHouse, getIntHouse, updateInterestedHouses,
@@ -15,6 +16,11 @@ export default function Houses({
 }) {
   const { user } = useAuth();
   const [isInterested, setIsInterested] = useState(false);
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
 
   const handleSubmit = () => {
     const payload = {
@@ -37,10 +43,20 @@ export default function Houses({
   return (
     <div id="bodyflex">
       <div className="card">
-        <Image
-          className="image"
-          src={house?.photos[0]}
-        />
+        <Carousel activeIndex={index} onSelect={handleSelect}>
+          <Carousel.Item>
+            <Image
+              className="image"
+              src={house?.photos[0]}
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Image
+              className="image"
+              src={house?.photos[1]}
+            />
+          </Carousel.Item>
+        </Carousel>
         <div className="heart" />
         <div className="contparent">
           <div className="contchild1">
