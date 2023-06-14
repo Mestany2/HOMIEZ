@@ -29,6 +29,15 @@ export default function ListOfHouses() {
   return (
     <>
       <SearchBar query={query} setQuery={setQuery} />
+      <br />
+      <div className="p-4">
+        <div className="welcome">
+          <div className="content rounded-3 p-3">
+            <h1 className="fs-3">Houses For Sale</h1>
+            <p className="mb-0"> Checkout the houses listed on the market! </p>
+          </div>
+        </div>
+      </div>
       {realtor.length > 0 ? (<SideBar profile={realtor[0]} />) : client?.length > 0 && <SideBar client={client[0]} />}
       {filteredHouses?.map((house) => <Houses house={house} realtor={realtor} client={client} />)}
     </>
