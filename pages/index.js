@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFile, faHouse, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../utils/context/authContext';
 import { getClientByUid, getRealtorsClients } from '../api/clientsData';
 import ListOfClients from '../components/ListOfClients';
@@ -55,8 +57,50 @@ function Home() {
         <SearchBar query={query} setQuery={setQuery} />
         <SideBar profile={realtor[0]} />
         <br />
-        <h2>Hello {user.displayName}!</h2>
-        <div className="fixed_headers">
+        <div className="p-4">
+          <div className="welcome">
+            <div className="content rounded-3 p-3">
+              <h1 className="fs-3">Welcome to Dashboard</h1>
+              <p className="mb-0">Hello {user.displayName}, welcome to your awesome dashboard!</p>
+            </div>
+          </div>
+          <section className="statistics mt-4">
+            <div className="row">
+              <div className="col-lg-4">
+                <div className="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
+                  <i className="uil-envelope-shield fs-2 text-center bg-primary rounded-circle"> <FontAwesomeIcon icon={faUser} /></i>
+                  <div className="ms-3">
+                    <div className="d-flex align-items-center">
+                      <h3 className="mb-0">{clients.length}</h3> <span className="d-block ms-2">Clients</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4">
+                <div className="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
+                  <i className="uil-file fs-2 text-center bg-danger rounded-circle"><FontAwesomeIcon icon={faHouse} /></i>
+                  <div className="ms-3">
+                    <div className="d-flex align-items-center">
+                      <h3 className="mb-0">{houses.length}</h3> <span className="d-block ms-2">Houses Listed</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4">
+                <div className="box d-flex rounded-2 align-items-center p-3">
+                  <i className="uil-users-alt fs-2 text-center bg-success rounded-circle"><FontAwesomeIcon icon={faFile} /></i>
+                  <div className="ms-3">
+                    <div className="d-flex align-items-center">
+                      <h3 className="mb-0">50</h3> <span className="d-block ms-2">Transactions</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        {/* <h2>Hello {user.displayName}!</h2> */}
+        {/* <div className="fixed_headers">
           <table id="table" className="table table-hover table-mc-light-blue">
             <thead>
               <tr>
@@ -67,9 +111,9 @@ function Home() {
               </tr>
             </thead>
           </table>
-        </div>
+        </div> */}
         {filteredClients?.map((theclient) => (
-          <ListOfClients key={theclient?.firebaseKey} client={theclient} onUpdate={onUpdateClients} />
+          <div className="admin d-flex rounded-2 "><ListOfClients key={theclient?.firebaseKey} client={theclient} onUpdate={onUpdateClients} /></div>
         ))}
       </div>
     );
