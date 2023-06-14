@@ -99,19 +99,6 @@ function Home() {
             </div>
           </section>
         </div>
-        {/* <h2>Hello {user.displayName}!</h2> */}
-        {/* <div className="fixed_headers">
-          <table id="table" className="table table-hover table-mc-light-blue">
-            <thead>
-              <tr>
-                <th> </th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Phone Number</th>
-              </tr>
-            </thead>
-          </table>
-        </div> */}
         {filteredClients?.map((theclient) => (
           <div className="admin d-flex rounded-2 "><ListOfClients key={theclient?.firebaseKey} client={theclient} onUpdate={onUpdateClients} /></div>
         ))}
@@ -121,7 +108,15 @@ function Home() {
     return (
       <div>
         <SearchBar query={query} setQuery={setQuery} />
-        <h1>Hello {user.displayName}!</h1>
+        <br />
+        <div className="p-4">
+          <div className="welcome">
+            <div className="content rounded-3 p-3">
+              <h1 className="fs-3">Welcome to Dashboard</h1>
+              <p className="mb-0">Hello {user.displayName}, welcome to your awesome dashboard!</p>
+            </div>
+          </div>
+        </div>
         <SideBar client={client[0]} />
         {filteredHouses.map((house) => (
           <Houses key={house.id} house={house} client={client} />

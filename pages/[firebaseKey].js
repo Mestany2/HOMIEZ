@@ -60,7 +60,15 @@ export default function InterestedPage() {
   return (
     <>
       <SearchBar query={query} setQuery={setQuery} />
-      {client?.client_uid === user.uid ? <SideBar client={client[0]} /> : <SideBar profile={realtor[0]} />}
+      {client[0]?.client_uid === user.uid ? <SideBar client={client[0]} /> : <SideBar profile={realtor[0]} />}
+      <div className="p-4">
+        <div className="welcome">
+          <div className="content rounded-3 p-3">
+            <h1 className="fs-3">Favorite Homes</h1>
+            <p className="mb-0">Here is a list of selected homes!</p>
+          </div>
+        </div>
+      </div>
       {filteredHouses.map((house) => <Houses int={intHouses} house={house} realtor={realtor} client={client[0]} onUpdate={getAllIntHouses} />)}
     </>
   );
