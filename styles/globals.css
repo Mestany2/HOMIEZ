@@ -344,7 +344,9 @@ h3 {
     margin-right: -10%;
   }
   .navhr{
-    width:112rem;
+    width:120rem;
+    margin: 0;
+    margin-left: -60px;
   }
 #clientBtn{
   margin-left: 100%;

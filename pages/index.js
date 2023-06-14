@@ -49,7 +49,7 @@ function Home() {
     viewRealtorClients();
   }, [realtor]);
 
-  if (realtors && realtors.some((oneRealtor) => oneRealtor.realtor_uid === user.uid)) {
+  if (realtors && realtors?.some((oneRealtor) => oneRealtor?.realtor_uid === user.uid)) {
     return (
       <div>
         <SearchBar query={query} setQuery={setQuery} />
@@ -69,7 +69,7 @@ function Home() {
           </table>
         </div>
         {filteredClients?.map((theclient) => (
-          <ListOfClients key={theclient.firebaseKey} client={theclient} onUpdate={onUpdateClients} />
+          <ListOfClients key={theclient?.firebaseKey} client={theclient} onUpdate={onUpdateClients} />
         ))}
       </div>
     );
@@ -89,13 +89,6 @@ function Home() {
     <div>
       <SearchBar query={query} setQuery={setQuery} />
       <div>
-        {/* <h2>Please Sign Up</h2>
-        <Link passHref href="/realtorForm">
-          <Button className="signupbtn" onClick={signIn}>Agent Sign Up </Button>
-        </Link>
-        <Link passHref href="/clientForm">
-          <Button className="signupbtn" onClick={signIn}>Client Sign Up </Button>
-        </Link> */}
         <div className="cotn_principal">
           <div className="cont_centrar">
 

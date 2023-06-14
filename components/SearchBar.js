@@ -44,7 +44,7 @@ export default function SearchBar({ query, setQuery }) {
           </div>
         </div>
         <div id="Profile-logo" role="button" tabIndex={0} onClick={() => { setOpen(!open); }}>
-          <button type="button" id="drop-btn" style={{ marginRight: '25px' }} onClick={() => setOpen((menu) => !menu)}>
+          <button type="button" id="drop-btn" style={{ marginRight: '175px' }} onClick={() => setOpen((menu) => !menu)}>
             <Image
               id="Logo"
               src={user.photoURL}
