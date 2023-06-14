@@ -751,5 +751,9 @@ margin-left: -300px;
 .listed{
 z-index: 2;
 }
+body {
+  background:#000;
+}
+
 
 
