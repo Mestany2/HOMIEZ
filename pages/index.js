@@ -12,6 +12,7 @@ import SearchBar from '../components/SearchBar';
 import { getHouses } from '../api/houseData';
 import Houses from '../components/Houses';
 import { signIn } from '../utils/auth';
+import Loading from '../components/Loading';
 
 function Home() {
   const [realtors, setRealtors] = useState([]);
@@ -20,10 +21,15 @@ function Home() {
   const [client, setClient] = useState({});
   const [houses, setHouses] = useState([]);
   const [query, setQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
 
   useEffect(() => {
-    getRealtors().then(setRealtors);
+    getRealtors().then((data) => {
+      setRealtors(data);
+      setIsLoading(false);
+    })
+      .catch(() => { setIsLoading(true); });
     getHouses().then(setHouses);
     getClientByUid(user.uid).then(setClient);
     getRealtorByUid(user.uid).then(setRealtor);
@@ -122,6 +128,10 @@ function Home() {
           <Houses key={house.id} house={house} client={client} />
         ))}
       </div>
+    );
+  } if (isLoading) {
+    return (
+      <Loading />
     );
   }
   return (

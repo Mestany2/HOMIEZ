@@ -8,7 +8,7 @@ const SideBar = ({ profile, client }) => (
     <div className="side-bar">
       <br />
       {profile ? (<><Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={profile?.realtor_image} /><h5>{profile?.realtor_name }</h5><br /><Link passHref href="/"> Dashboard </Link> <br /><Link passHref href="/ListOfHouses" className="links"> View Homes </Link><br /><br /><br /></>)
-        : (<><Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={client?.client_image} /><h5>{client?.client_name}</h5><br /><Link passHref href="/" className="links"> View Homes </Link><br /><br /><Link passHref href={`${client?.firebaseKey}`}> My List of Homes</Link><br /></>)}
+        : (<><Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={client?.client_image} /><h5>{client?.client_name}</h5><br /><Link passHref href="/" className="links"> View Homes </Link><br /><br /><Link passHref href={`${client?.firebaseKey}`}> Favorites Homes</Link><br /></>)}
 
     </div>
   </>
