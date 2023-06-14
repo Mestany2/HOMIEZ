@@ -743,7 +743,7 @@ margin-left: 30px;
 }
 .clientModify{
 display: block;
-margin-left: -300px;
+margin-left: -375px;
 }
 .img{
   z-index: 2;
@@ -754,6 +754,23 @@ z-index: 2;
 body {
   background:#000;
 }
+/* .d-flex{
+  display: flex;
+  flex-wrap: wrap;
+} */
+.clientCard{
+  display: flex;
+  flex-wrap: wrap;
+  width: 128%;
 
+}
+.admin{
+  flex:50%;
+  width: 575px;
+}
+.p-4{
+  width: 112%;
+  margin-left: -21px;
+}
 
 

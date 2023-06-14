@@ -105,9 +105,11 @@ function Home() {
             </div>
           </section>
         </div>
-        {filteredClients?.map((theclient) => (
-          <div className="admin d-flex rounded-2 "><ListOfClients key={theclient?.firebaseKey} client={theclient} onUpdate={onUpdateClients} /></div>
-        ))}
+        <div className="clientCard ">
+          {filteredClients?.map((theclient) => (
+            <div className="admin d-flex rounded-2 "><ListOfClients key={theclient?.firebaseKey} client={theclient} onUpdate={onUpdateClients} /></div>
+          ))}
+        </div>
       </div>
     );
   } if (client[0]?.client_uid === user.uid) {
