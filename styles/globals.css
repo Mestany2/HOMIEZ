@@ -19,7 +19,7 @@ a {
 }
 
 body {
-  background-color: #c5c7c7;
+  background-color: #2a2b3d;
 }
 .me-auto{
   margin-left: 1000px;
@@ -37,9 +37,11 @@ color: white;
 }
 .nav-link{
   width: 150px;
+  color: white;
 }
 .navbar{
   height: 80px;
+  color: white;
 }
 #hero {
   background: url('https://onclickwebdesign.com/wp-content/uploads/hero_1.jpg') center center no-repeat;
@@ -106,7 +108,7 @@ video#bgvideo {
   min-width: 150px;
   width: 100px;
   height: 100%;
-  background: #201f1f;
+  background: #252636;
   padding-right: 10px;
   display: flex;
   justify-content: flex-start;
@@ -187,7 +189,7 @@ h3 {
   padding-top: 6px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 12px;
-  color: rgb(92, 92, 92);
+  color: rgb(255, 255, 255);
 }
 
 .price {
@@ -306,13 +308,14 @@ h3 {
   .dropdown {
     position: absolute;
     top: 100%;
-    right: 0;
+    right: 100px;
     width: 300px;
+    color: white;
     z-index: 2;
     float: right;
     border: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
-    background-color: white;
+    box-shadow: 0 16px 24px 2px rgba(240, 239, 239, 0.14);
+    background-color: #2a2b3d;
     z-index:100
   }
   
@@ -326,7 +329,7 @@ h3 {
   }
   
   li:hover {
-    background-color: rgba(0, 0, 0, 0.14);
+    background-color: rgba(197, 182, 182, 0.14);
     cursor: pointer;
   }
   
@@ -334,6 +337,7 @@ h3 {
     border: 0;
     border-radius: 250px;
     background-color: transparent;
+    color: white;
 
   }
   .navbar{
@@ -689,3 +693,63 @@ margin-left: 30px;
 .signupbtnform{
   margin-left: 20%;
 }
+.welcome {
+	color: #D1D5DB;
+}
+
+.welcome .content {
+	background-color: #313348;
+}
+
+.welcome p {
+	color: #9CA3AF;
+}
+.statistics {
+	color: #E5E7EB;
+}
+
+.statistics .box {
+	background-color: #313348;
+}
+
+.statistics .box i {
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+}
+
+.statistics .box p {
+	color: #9CA3AF;
+}
+#table{
+  color: white;
+}
+.phone{
+  color: white;
+}
+.fs-5{
+  width: 100px;
+}
+.admins .box .admin {
+	background-color: #313348;
+}
+
+.admins .box h3 {
+	color: #D1D5DB;
+}
+
+.admins .box p {
+	color: #9CA3AF;
+}
+.clientModify{
+display: block;
+margin-left: -300px;
+}
+.img{
+  z-index: 2;
+}
+.listed{
+z-index: 2;
+}
+
+
