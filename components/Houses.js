@@ -111,5 +111,5 @@ Houses.propTypes = {
 Houses.defaultProps = {
   realtor: '',
   client: '',
-  int: [{}],
+  int: '',
 };
