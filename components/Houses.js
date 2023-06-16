@@ -35,11 +35,13 @@ export default function Houses({
 
   const deleteHouseInterestedList = () => {
     if (window.confirm('Delete this house from your list?')) {
-      getIntHouse(house?.listingId).then((oneHouse) => { deleteInterestedHouse(oneHouse[0]?.firebaseKey); });
+      getIntHouse(house?.listingId).then((oneHouse) => {
+        console.warn('the house', oneHouse);
+        deleteInterestedHouse(oneHouse[0]?.firebaseKey);
+      });
     }
     onUpdate();
   };
-  console.warn('The client', client);
   return (
     <div id="bodyflex">
       <div className="card">
@@ -103,11 +105,11 @@ Houses.propTypes = {
     firebaseKey: PropTypes.string,
     client_uid: PropTypes.string,
   }),
-  int: PropTypes.arrayOf,
+  int: PropTypes.arrayOf(PropTypes.shape),
   onUpdate: PropTypes.func.isRequired,
 };
 Houses.defaultProps = {
   realtor: '',
   client: '',
-  int: '',
+  int: [{}],
 };

@@ -18,7 +18,6 @@ export default function ListOfHouses() {
     getHouses().then(setHouses);
     getRealtorByUid(user.uid).then(setRealtor);
     getClientByUid(user.uid).then((clientData) => {
-      console.warn('client data', clientData);
       setClient(clientData);
     });
   }, [user]);

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
-import { faHouse, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faCalculator, faHouse, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { Image, Navbar } from 'react-bootstrap';
@@ -26,10 +26,18 @@ export default function SearchBar({ query, setQuery }) {
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
+              <FontAwesomeIcon icon={faHouse} />
               <Link className="nav-link" passHref href="/">
-                <FontAwesomeIcon icon={faHouse}>  </FontAwesomeIcon>
+                Home
               </Link>
-              Home
+
+            </li>
+            <li className="nav-item active">
+              <FontAwesomeIcon icon={faCalculator} />
+              <Link className="nav-link" passHref href="/MortgageCalculator">
+                Mortgage Calculator
+              </Link>
+
             </li>
           </ul>
           <div className="searching">
@@ -58,6 +66,9 @@ export default function SearchBar({ query, setQuery }) {
               <ul>
                 <Link passHref href="/">
                   <li>Home</li>
+                </Link>
+                <Link passHref href="/MortgageCalculator">
+                  <li>Mortgage Calculator </li>
                 </Link>
                 <li>
                   <Link passHref href="/">

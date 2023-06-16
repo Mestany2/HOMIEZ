@@ -26,7 +26,7 @@ export default function InterestedPage() {
     getClientByFbk(firebaseKey).then(setClient);
     getClientHouses(firebaseKey).then(setIntHouses);
     getRealtorByUid(user.uid).then(setRealtor);
-  }, [firebaseKey]);
+  }, [user.uid]);
 
   const getAllIntHouses = () => {
     getClientByFbk(firebaseKey).then(setClient);
@@ -52,9 +52,6 @@ export default function InterestedPage() {
     getAllIntHouses,
     [intHouses],
   );
-
-  console.warn('list the int client', intHouses);
-
   const filteredHouses = houses.listOfHomes.filter((house) => house?.address?.full.toLowerCase().includes(query.toLowerCase()) || house?.listPrice?.toLowerCase().includes(query.toLocaleLowerCase()));
 
   return (
