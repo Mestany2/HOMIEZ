@@ -17,7 +17,7 @@ export default function Calculator() {
     homeValue: 150000,
     downPayment: 150000 * 0.2,
     loanAmount: 150000 * 0.8,
-    interestRate: 5,
+    interestRate: 6,
     loanTerm: 30,
   });
   const handleChange = (event) => {
