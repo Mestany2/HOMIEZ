@@ -107,7 +107,7 @@ export default function Calculator() {
           </Grid>
           <Grid item xs={12} md={6}>
             <Stack gap={3}>
-              <Typography textAlign="center" variant="h5" sx={{color: 'white'}}> Monthly Payment : ${monthlyPayment.toFixed(0)}</Typography>
+              <Typography textAlign="center" variant="h5" sx={{ color: 'white' }}> Monthly Payment : ${monthlyPayment.toFixed(0)}</Typography>
               <Stack direction="row" justifyContent="center">
                 <div>
                   <Pie data={pieChartData} />
