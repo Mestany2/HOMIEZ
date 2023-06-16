@@ -30,7 +30,7 @@ function Home() {
       setIsLoading(false);
     })
       .catch(() => { setIsLoading(true); });
-    getHouses().then(setHouses);
+    getHouses().then((data) => setHouses(data));
     getClientByUid(user.uid).then(setClient);
     getRealtorByUid(user.uid).then(setRealtor);
   }, [user]);
@@ -127,7 +127,7 @@ function Home() {
         </div>
         <SideBar client={client[0]} />
         {filteredHouses.map((house) => (
-          <Houses key={house.id} house={house} client={client} />
+          <Houses key={house.mlsId} house={house} client={client} />
         ))}
       </div>
     );
