@@ -26,7 +26,7 @@ export default function InterestedPage() {
     getClientByFbk(firebaseKey).then(setClient);
     getClientHouses(firebaseKey).then(setIntHouses);
     getRealtorByUid(user.uid).then(setRealtor);
-  }, [user.uid]);
+  }, []);
 
   const getAllIntHouses = () => {
     getClientByFbk(firebaseKey).then(setClient);
@@ -66,7 +66,7 @@ export default function InterestedPage() {
           </div>
         </div>
       </div>
-      {filteredHouses.map((house) => <Houses int={intHouses} house={house} realtor={realtor} client={client[0]} onUpdate={getAllIntHouses} />)}
+      {filteredHouses.map((house) => <Houses key={house.mlsId} int={intHouses} house={house} realtor={realtor} client={client[0]} onUpdate={getAllIntHouses} />)}
     </>
   );
 }

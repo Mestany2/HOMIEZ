@@ -36,12 +36,12 @@ export default function Houses({
   const deleteHouseInterestedList = () => {
     if (window.confirm('Delete this house from your list?')) {
       getIntHouse(house?.listingId).then((oneHouse) => {
-        console.warn('the house', oneHouse);
         deleteInterestedHouse(oneHouse[0]?.firebaseKey);
       });
     }
     onUpdate();
   };
+
   return (
     <div id="bodyflex">
       <div className="card">
@@ -63,7 +63,7 @@ export default function Houses({
         <div className="contparent">
           <div className="contchild1">
             <br />
-            {(realtor[0]?.realtor_uid === user.uid || int) ? (<></>)
+            {(realtor[0]?.realtor_uid === user.uid || int.length > 0) ? (<></>)
               : (
                 <button
                   type="submit"
@@ -101,15 +101,16 @@ Houses.propTypes = {
   realtor: PropTypes.shape({
     realtor_uid: PropTypes.string,
   }),
-  client: PropTypes.shape({
+  client: PropTypes.arrayOf(PropTypes.shape({
     firebaseKey: PropTypes.string,
     client_uid: PropTypes.string,
-  }),
+  })),
   int: PropTypes.arrayOf(PropTypes.shape),
-  onUpdate: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func,
 };
 Houses.defaultProps = {
-  realtor: '',
-  client: '',
-  int: '',
+  realtor: {},
+  client: [],
+  int: [],
+  onUpdate: deleteInterestedHouse,
 };
