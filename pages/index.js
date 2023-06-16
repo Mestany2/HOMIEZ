@@ -31,12 +31,16 @@ function Home() {
     })
       .catch(() => { setIsLoading(true); });
     getHouses().then(setHouses);
-    getClientByUid(user.uid).then(setClient);
+    getClientByUid(user.uid).then((data) => {
+      setClient(data);
+      setIsLoading(false);
+    });
     getRealtorByUid(user.uid).then(setRealtor);
   }, [user]);
 
   const onUpdateClients = () => {
     getRealtorsClients(realtor[0]?.firebaseKey).then(setClients);
+    setIsLoading(false);
   };
   const viewRealtorClients = () => {
     getRealtorsClients(realtor[0]?.firebaseKey).then((clientss) => {
