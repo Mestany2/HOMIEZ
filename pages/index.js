@@ -11,7 +11,6 @@ import SideBar from '../components/SideBar';
 import SearchBar from '../components/SearchBar';
 import { getHouses } from '../api/houseData';
 import Houses from '../components/Houses';
-import { signIn } from '../utils/auth';
 import Loading from '../components/Loading';
 
 function Home() {
@@ -150,7 +149,7 @@ function Home() {
                     <h2>Agent Sign Up</h2>
                     <p>Account Not Found, Please Sign Up Here As An Agnet</p>
                     <Link passHref href="/realtorForm">
-                      <Button variant="success" className="signupbtnform" onClick={signIn}>Agent Sign Up </Button>
+                      <Button variant="success" className="signupbtnform">Agent Sign Up </Button>
                     </Link>
                   </div>
                 </div>
@@ -161,7 +160,7 @@ function Home() {
                     <p>Account Not Found, Please Sign Up Here As A Client</p>
 
                     <Link passHref href="/clientForm">
-                      <Button variant="secondary" className="signupbtnform" onClick={signIn}>Client Sign Up </Button>
+                      <Button variant="secondary" className="signupbtnform" >Client Sign Up </Button>
                     </Link>
                   </div>
                 </div>
