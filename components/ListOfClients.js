@@ -13,7 +13,6 @@ export default function ListOfClients({ client, onUpdate }) {
       deleteClient(client.firebaseKey).then(() => onUpdate());
     }
   };
-
   return (
     <>
       <section className="admins mt-4">

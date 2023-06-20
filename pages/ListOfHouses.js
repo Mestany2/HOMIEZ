@@ -24,7 +24,6 @@ export default function ListOfHouses() {
 
   const filteredHouses = houses.filter((house) => house.address.full.toLowerCase().includes(query.toLowerCase()) || house.listPrice.toLowerCase().includes(query.toLocaleLowerCase()));
 
-  console.warn('list of homes client', client);
   return (
     <>
       <SearchBar query={query} setQuery={setQuery} />

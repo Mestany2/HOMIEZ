@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { Image } from 'react-bootstrap';
 import Houses from '../components/Houses';
 import SideBar from '../components/SideBar';
 import { getClientByFbk, getClientHouses } from '../api/clientsData';
@@ -57,12 +58,12 @@ export default function InterestedPage() {
       <div className="p-4">
         <div className="welcome">
           <div className="content rounded-3 p-3">
-            <h1 className="fs-3">Favorite Homes</h1>
+            <Image style={{ width: '5rem', height: '100', borderRadius: '100px' }} src={client[0]?.client_image} /><h5>{client[0]?.client_name}&#180;s Favorite Houses</h5>
             <p className="mb-0">Here is a list of selected homes!</p>
           </div>
         </div>
       </div>
-      {filteredHouses.map((house) => <Houses int={intHouses} house={house} realtor={realtor} client={client[0]} onUpdate={getAllIntHouses} />)}
+      {filteredHouses.map((house) => <Houses key={house.mlsId} int={intHouses} house={house} realtor={realtor} client={client[0]} onUpdate={getAllIntHouses} />)}
     </>
   );
 }
