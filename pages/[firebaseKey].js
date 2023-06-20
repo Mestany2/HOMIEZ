@@ -15,7 +15,7 @@ const initialValues = {
 
 export default function InterestedPage() {
   const router = useRouter();
-  const { firebaseKey } = router.query;
+  // const { firebaseKey } = router.query;
   const [realtor, setRealtor] = useState([]);
   const [houses, setHouses] = useState(initialValues);
   const [intHouses, setIntHouses] = useState([]);
@@ -23,18 +23,13 @@ export default function InterestedPage() {
   const [query, setQuery] = useState('');
   const { user } = useAuth();
 
-  useEffect(() => {
-    getClientByFbk(firebaseKey).then(setClient);
-    getClientHouses(firebaseKey).then(setIntHouses);
-    getRealtorByUid(user.uid).then(setRealtor);
-  }, []);
-
   const getAllIntHouses = () => {
+    const { firebaseKey } = router.query;
     getClientByFbk(firebaseKey).then(setClient);
     getClientHouses(firebaseKey).then(setIntHouses);
     getRealtorByUid(user.uid).then(setRealtor);
     if (intHouses.length === 0) return;
-
+    console.warn('the int', intHouses);
     const fetchHouses = async () => {
       const fetchedHouses = await Promise.all(
         intHouses.map(async (item) => {
@@ -49,9 +44,10 @@ export default function InterestedPage() {
 
     fetchHouses();
   };
+
   useEffect(
     getAllIntHouses,
-    [intHouses],
+    [intHouses.length],
   );
   const filteredHouses = houses.listOfHomes.filter((house) => house?.address?.full.toLowerCase().includes(query.toLowerCase()) || house?.listPrice?.toLowerCase().includes(query.toLocaleLowerCase()));
 

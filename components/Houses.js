@@ -36,10 +36,10 @@ export default function Houses({
   const deleteHouseInterestedList = () => {
     if (window.confirm('Delete this house from your list?')) {
       getIntHouse(house?.listingId).then((oneHouse) => {
-        deleteInterestedHouse(oneHouse[0]?.firebaseKey);
+        deleteInterestedHouse(oneHouse[0]?.firebaseKey).then(() => onUpdate());
+
       });
     }
-    onUpdate();
   };
 
   return (
