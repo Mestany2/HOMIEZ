@@ -37,7 +37,6 @@ export default function Houses({
     if (window.confirm('Delete this house from your list?')) {
       getIntHouse(house?.listingId).then((oneHouse) => {
         deleteInterestedHouse(oneHouse[0]?.firebaseKey).then(() => onUpdate());
-
       });
     }
   };
