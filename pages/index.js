@@ -59,7 +59,7 @@ function Home() {
     const wb = XLSX?.utils.book_new();
     const ws = XLSX?.utils.json_to_sheet(sheetData);
     XLSX?.utils.book_append_sheet(wb, ws, 'Sheet 1');
-    XLSX?.writeFile(wb, 'MyExcel.xlsx');
+    XLSX?.writeFile(wb, 'Client List.xlsx');
   };
   useEffect(() => {
     viewRealtorClients();
