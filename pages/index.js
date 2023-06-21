@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile, faHouse, faUser } from '@fortawesome/free-solid-svg-icons';
+import XLSX from 'xlsx';
 import { useAuth } from '../utils/context/authContext';
 import { getClientByUid, getRealtorsClients } from '../api/clientsData';
 import ListOfClients from '../components/ListOfClients';
@@ -21,6 +22,7 @@ function Home() {
   const [houses, setHouses] = useState([]);
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [sheetData, setSheetData] = useState(null);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -40,6 +42,7 @@ function Home() {
   const viewRealtorClients = () => {
     getRealtorsClients(realtor[0]?.firebaseKey).then((clientss) => {
       setClients((prevClients) => [...prevClients, ...clientss]);
+      setSheetData(((prevClients) => [...prevClients, ...clientss]));
     });
   };
   const filteredClients = clients.filter(
@@ -52,8 +55,15 @@ function Home() {
       || house.listPrice.toLowerCase().includes(query.toLowerCase()),
   );
 
+  const handleOnExport = () => {
+    const wb = XLSX?.utils.book_new();
+    const ws = XLSX?.utils.json_to_sheet(sheetData);
+    XLSX?.utils.book_append_sheet(wb, ws, 'Sheet 1');
+    XLSX?.writeFile(wb, 'Client List.xlsx');
+  };
   useEffect(() => {
     viewRealtorClients();
+    setSheetData(clients);
   }, [realtor]);
 
   if (realtors && realtors?.some((oneRealtor) => oneRealtor?.realtor_uid === user.uid)) {
@@ -96,7 +106,7 @@ function Home() {
                   <i className="uil-users-alt fs-2 text-center bg-success rounded-circle"><FontAwesomeIcon icon={faFile} /></i>
                   <div className="ms-3">
                     <div className="d-flex align-items-center">
-                      <h3 className="mb-0">50</h3> <span className="d-block ms-2">Transactions</span>
+                      <Button className="btn-light" onClick={handleOnExport}>Export Clients</Button>
                     </div>
                   </div>
                 </div>
