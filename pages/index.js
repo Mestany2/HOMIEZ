@@ -106,7 +106,7 @@ function Home() {
                   <i className="uil-users-alt fs-2 text-center bg-success rounded-circle"><FontAwesomeIcon icon={faFile} /></i>
                   <div className="ms-3">
                     <div className="d-flex align-items-center">
-                      <Button className="btn-light" onClick={handleOnExport}>Export Clients</Button>
+                      <Button className="btn bg-transparent" onClick={handleOnExport}>Export Clients</Button>
                     </div>
                   </div>
                 </div>
